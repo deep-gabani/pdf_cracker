@@ -1,4 +1,4 @@
-# PDF Password Cracker [v1.0.4]
+# PDF Cracker [v2.0.0]
 
 A python command line utility to crack open password-protected PDF files.
 
@@ -15,8 +15,8 @@ bash Anaconda3-2020.07-Linux-x86_64.sh
 
 Now, create a new conda env and activate it using the following commands:
 ```shell
-conda create -n pdf_password_cracker -y python=3.8.5
-conda activate pdf_password_cracker
+conda create -n pdf_cracker -y python=3.8.5
+conda activate pdf_cracker
 ```
 
 Now, install the dependencies using the following command:
