@@ -1,6 +1,7 @@
 """Generates all possible combinations of passwords for the given arguments."""
 from itertools import product
 import typing as t
+import apache_beam as beam
 
 ASCII_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 DIGITS = '39315'
@@ -44,3 +45,30 @@ def generate_passwords(password_length: int,
 
     print(f'Found {len(all_combinations)} possible combinations...')
     return all_combinations
+
+
+class GeneratePasswordLists(beam.DoFn):
+    """Fetches passwords' list of this worker."""
+    def __init__(self, threads: int, potential_passwords: t.List[str]):
+        self.threads = threads
+        self.potential_passwords = potential_passwords
+
+    def ceil(self, num: float) -> int:
+        """Replica of math.ceil."""
+        if num > int(num):
+            return int(num) + 1
+        return int(num)
+
+    def process(self, _: int) -> t.Iterator[t.List[str]]:
+        """Cuts out the password list for the given worker index."""
+
+        # Number of passwords to process per worker.
+        total_passwords = len(self.potential_passwords)
+        passwords_per_worker = min(self.ceil(total_passwords / self.threads),
+                                   10_000)
+        total_divisions = self.ceil(total_passwords / passwords_per_worker)
+
+        for i in range(total_divisions):
+            password_list = self.potential_passwords[
+                i * passwords_per_worker: (i + 1) * passwords_per_worker]
+            yield password_list

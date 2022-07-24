@@ -35,7 +35,7 @@ def parse_args() -> t.Tuple:
     if 'direct_num_workers' not in pipeline_args:
         pipeline_args.extend(f'--direct_num_workers {args.threads}'.split())
     if 'direct_running_mode' not in pipeline_args:
-        pipeline_args.extend('--direct_running_mode multi_threading'.split())
+        pipeline_args.extend('--direct_running_mode multi_processing'.split())
 
     return (args.input_pdf,
             args.password_length,
