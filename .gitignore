@@ -1,2 +1,4 @@
-__pycache__/
 .pytype/
+__pycache__/
+
+src/__pycache__/

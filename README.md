@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ## Usage
 ```
-usage: main.py [-h] -i INPUT_PDF -n PASSWORD_LENGTH [-l] [-d] [-sc] [-w]
+usage: . [-h] -i INPUT_PDF -n PASSWORD_LENGTH [-l] [-d] [-sc] [-w]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -43,7 +43,7 @@ optional arguments:
 Usage examples:
 1. Cracking a pdf with password of length 5 and only digits.
 ```
-python3 src/main.py \
+python3 . \
     -i assets/5.pdf \
     -n 5 \
     -d
@@ -51,7 +51,7 @@ python3 src/main.py \
 
 2. Cracking a pdf with password of length 4 and only letters.
 ```
-python3 src/main.py \
+python3 . \
     -i assets/7.pdf \
     -n 4 \
     -l
@@ -59,7 +59,7 @@ python3 src/main.py \
 
 3. Cracking a pdf with password of length 4 with letters and digits.
 ```
-python3 src/main.py \
+python3 . \
     -i assets/7.pdf \
     -n 4 \
     -l \
@@ -68,7 +68,7 @@ python3 src/main.py \
 
 4. Cracking a pdf with password of length 4 with letters, digits and special characters.
 ```
-python3 src/main.py \
+python3 . \
     -i assets/7.pdf \
     -n 4 \
     -l \
@@ -78,7 +78,7 @@ python3 src/main.py \
 
 5. Cracking a pdf with password of length 4 with letters, digits, special characters and whitespaces.
 ```
-python3 src/main.py \
+python3 . \
     -i assets/7.pdf \
     -n 4 \
     -l \

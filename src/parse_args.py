@@ -1,11 +1,9 @@
-"""Cracking a password protected PDF."""
-import typing as t
+"""Parses command line arguments."""
 import argparse
-from util import Colors, get_colored_text
-from util import create_potential_passwords, crack_pdf
+import typing as t
 
 
-def parse_arguments() -> t.Tuple:
+def parse_args() -> t.Tuple:
     """Parses arguments and returns a tuple of arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input_pdf', type=str, required=True,
@@ -35,22 +33,3 @@ def parse_arguments() -> t.Tuple:
             args.digits,
             args.special_chars,
             args.whitespace)
-
-
-if __name__ == '__main__':
-    input_pdf, password_length, letters, digits, special_chars, whitespace = parse_arguments()
-
-    potential_passwords = create_potential_passwords(password_length=password_length,
-                                                     letters=letters,
-                                                     digits=digits,
-                                                     special_chars=special_chars,
-                                                     whitespace=whitespace)
-
-    password = crack_pdf(input_pdf, potential_passwords)
-    if password:
-        print(f'Whohooo! The password for pdf {get_colored_text(input_pdf, Colors.header)} is: ' +
-              f'"{get_colored_text(password, Colors.okgreen)}".')
-    else:
-        print(get_colored_text(
-            'Oh o! Could not crack it with the arguments given. Try with different ones!',
-            Colors.fail))
