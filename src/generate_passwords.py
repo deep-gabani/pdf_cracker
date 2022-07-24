@@ -3,8 +3,7 @@ from itertools import product
 import typing as t
 
 ASCII_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-# DIGITS = '0123456789'
-DIGITS = '39315'
+DIGITS = '0123456789'
 SPECIAL_CHARS = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
 WHITESPACE = ' \t\n\r\x0b\x0c'
 

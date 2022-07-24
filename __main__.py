@@ -1,8 +1,8 @@
 """Cracking a password protected PDF."""
-from colors import Colors, get_colored_text
-from parse_args import parse_args
-from generate_passwords import generate_passwords
-from try_passwords import try_passwords
+from src.colors import Colors, get_colored_text
+from src.parse_args import parse_args
+from src.generate_passwords import generate_passwords
+from src.try_passwords import try_passwords
 
 
 if __name__ == '__main__':
