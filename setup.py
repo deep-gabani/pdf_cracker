@@ -1,6 +1,7 @@
 """Setup pdf-cracker.
 
-This setup.py script makes use of Apache Beam's recommended way to install non-python dependencies to worker images.
+This setup.py script makes use of Apache Beam's recommended way to install
+non-python dependencies to worker images.
 
 Please see this documentation and example code:
 - https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/#nonpython
