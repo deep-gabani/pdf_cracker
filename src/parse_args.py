@@ -24,12 +24,24 @@ def parse_args() -> t.Tuple:
                         default=False,
                         help="Flag to indicate if there are whitespace in the password. \
                             Default = False.")
+    parser.add_argument('-t', '--threads', type=int, default=1,
+                        help="Number of threads to use.")
 
-    args = parser.parse_args()
+    args, pipeline_args = parser.parse_known_args()
+
+    # For beam to use parallelism.
+    if 'runner' not in pipeline_args:
+        pipeline_args.extend('--runner DirectRunner'.split())
+    if 'direct_num_workers' not in pipeline_args:
+        pipeline_args.extend(f'--direct_num_workers {args.threads}'.split())
+    if 'direct_running_mode' not in pipeline_args:
+        pipeline_args.extend('--direct_running_mode multi_threading'.split())
 
     return (args.input_pdf,
             args.password_length,
             args.letters,
             args.digits,
             args.special_chars,
-            args.whitespace)
+            args.whitespace,
+            args.threads,
+            pipeline_args)

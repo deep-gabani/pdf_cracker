@@ -1,4 +1,4 @@
-"""Colors utility. It is used in printing text with famous command line colors."""
+"""Colors utility. It is used to print text with famous command line colors."""
 from dataclasses import dataclass
 
 

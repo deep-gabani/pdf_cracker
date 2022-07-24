@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ## Usage
 ```
-usage: . [-h] -i INPUT_PDF -n PASSWORD_LENGTH [-l] [-d] [-sc] [-w]
+usage: . [-h] -i INPUT_PDF -n PASSWORD_LENGTH [-l] [-d] [-sc] [-w] [-t THREADS]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -38,6 +38,8 @@ optional arguments:
   -d, --digits          Flag to indicate if there are digits in the password. Default = False.
   -sc, --special_chars  Flag to indicate if there are special characters in the password. Default = False.
   -w, --whitespace      Flag to indicate if there are whitespace in the password. Default = False.
+  -t THREADS, --threads THREADS
+                        Number of threads to use.
 ```
 
 Usage examples:
@@ -85,6 +87,18 @@ python3 . \
     -d \
     -sc \
     -w
+```
+
+5. Cracking a pdf with password of length 4 with letters, digits, special characters and whitespaces with 5 threads parallely.
+```
+python3 . \
+    -i assets/7.pdf \
+    -n 4 \
+    -l \
+    -d \
+    -sc \
+    -w \
+    -t 5
 ```
 
 ## Developers

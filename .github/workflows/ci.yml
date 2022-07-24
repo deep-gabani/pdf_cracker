@@ -21,9 +21,7 @@ jobs:
         pip install -r requirements.txt
     - name: Lint Check
       run: |
-        pylint $(git ls-files '__main__.py')
-        pylint $(git ls-files 'src/*.py')
+        flake8 $(git ls-files '.')
     - name: Type Check
       run: |
         pytype $(git ls-files '__main__.py')
-        pytype $(git ls-files 'src/*.py')

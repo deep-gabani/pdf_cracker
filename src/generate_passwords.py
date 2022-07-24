@@ -3,7 +3,7 @@ from itertools import product
 import typing as t
 
 ASCII_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-DIGITS = '0123456789'
+DIGITS = '39315'
 SPECIAL_CHARS = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
 WHITESPACE = ' \t\n\r\x0b\x0c'
 
@@ -19,7 +19,8 @@ def generate_passwords(password_length: int,
     Args:
         password_length: The total number of letters in the password.
         digits: Flag to indicate if there are digits in the password.
-        special_chars: Flag to indicate if there are special characters in the password.
+        special_chars: Flag to indicate if there are special characters in the
+                       password.
         whitespace: Flag to indicate if there are whitespace in the password.
     Returns:
         A list of potential passwords.
