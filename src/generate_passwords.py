@@ -3,14 +3,16 @@ from itertools import product
 import typing as t
 import apache_beam as beam
 
-ASCII_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-DIGITS = '39315'
+ASCII_LOWER_LETTERS = 'abcdefghijklmnopqrstuvwxyz'
+ASCII_UPPER_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+DIGITS = '0123456789'
 SPECIAL_CHARS = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
 WHITESPACE = ' \t\n\r\x0b\x0c'
 
 
 def generate_passwords(password_length: int,
-                       letters: bool,
+                       lower_letters: bool,
+                       upper_letters: bool,
                        digits: bool,
                        special_chars: bool,
                        whitespace: bool) -> t.List[str]:
@@ -27,8 +29,10 @@ def generate_passwords(password_length: int,
         A list of potential passwords.
     """
     possible_chars = ''
-    if letters:
-        possible_chars += ASCII_LETTERS
+    if lower_letters:
+        possible_chars += ASCII_LOWER_LETTERS
+    if upper_letters:
+        possible_chars += ASCII_UPPER_LETTERS
     if digits:
         possible_chars += DIGITS
     if special_chars:
@@ -61,7 +65,8 @@ class GeneratePasswordLists(beam.DoFn):
             return int(num) + 1
         return int(num)
 
-    def process(self, total_jobs: int) -> t.Iterator[t.List[str]]:
+    def process(self,
+                total_jobs: int) -> t.Iterator[t.Tuple[int, t.List[str]]]:
         """Cuts out the password list for the given worker index."""
         passwords_per_worker = self.ceil(len(self.potential_passwords) /
                                          total_jobs)

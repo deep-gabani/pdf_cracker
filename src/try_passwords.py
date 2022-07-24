@@ -16,7 +16,7 @@ def try_passwords(job_index: int,
     if os.path.exists(password_file):
         return ''
 
-    iterator = tqdm(potential_passwords, desc=f'Job index: {job_index}')
+    iterator = tqdm(potential_passwords, desc=f'Job {job_index}')
 
     with open_local(input_pdf) as local_pdf:
         for password in iterator:
