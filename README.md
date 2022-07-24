@@ -1,4 +1,4 @@
-# PDF Cracker [v2.0.0]
+# PDF Cracker [v2.0.1]
 
 A python command line utility to crack open password-protected PDF files.
 
@@ -134,7 +134,17 @@ python3 . \
 
 ## Performance
 
+Depending on the hardware capapbilities, performace can vary.
 
+On my 12 core, 16GB DDR4 RAM and with 10 threads, it took about 08:23 minutes to crack open `assets/2.pdf` with password `oops`.
+Exact command I used was:
+```bash
+python3 . \
+    -i assets/2.pdf \
+    -l \
+    -n 4 \
+    -t 10
+```
 
 
 ## Developers

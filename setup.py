@@ -72,7 +72,7 @@ setup(
     packages=find_packages(),
     author='Deep',
     author_email='16bit052@nirmauni.ac.in',
-    version='2.0.0',
+    version='2.0.1',
     description='A utility to crack open password-protected PDFs.',
     long_description=open('README.md', 'r', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
