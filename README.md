@@ -1,4 +1,4 @@
-# PDF Password Cracker [v1.0.3]
+# PDF Password Cracker [v1.0.4]
 
 A python command line utility to crack open password-protected PDF files.
 
