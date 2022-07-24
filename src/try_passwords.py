@@ -7,7 +7,8 @@ import apache_beam as beam
 from src.util import open_local
 
 
-def try_passwords(input_pdf: str,
+def try_passwords(job_index: int,
+                  input_pdf: str,
                   potential_passwords: t.List[str],
                   password_file: str) -> str:
     """Tries password one-by-one."""
@@ -15,7 +16,7 @@ def try_passwords(input_pdf: str,
     if os.path.exists(password_file):
         return ''
 
-    iterator = tqdm(potential_passwords, desc='Cracking PDF...')
+    iterator = tqdm(potential_passwords, desc=f'Job index: {job_index}')
 
     with open_local(input_pdf) as local_pdf:
         for password in iterator:
@@ -38,10 +39,13 @@ class TryPasswords(beam.DoFn):
         self.input_pdf = input_pdf
         self.password_file = password_file
 
-    def process(self, password_list: t.List[str]) -> t.Iterator[
-                                                    t.Tuple[str, str]]:
+    def process(self,
+                password_list_collection: t.Tuple[int, t.List[str]]
+                ) -> t.Iterator[t.Tuple[str, str]]:
         """Applies passwords one-by-one."""
-        password = try_passwords(self.input_pdf,
+        job_index, password_list = password_list_collection
+        password = try_passwords(job_index=job_index,
+                                 input_pdf=self.input_pdf,
                                  potential_passwords=password_list,
                                  password_file=self.password_file)
 

@@ -1,6 +1,7 @@
 """Cracking a password protected PDF."""
 import logging
 import os
+from math import ceil
 from src.parse_args import parse_args
 from src.generate_passwords import generate_passwords, GeneratePasswordLists
 from src.try_passwords import TryPasswords
@@ -23,6 +24,10 @@ if __name__ == '__main__':
                                              digits=digits,
                                              special_chars=special_chars,
                                              whitespace=whitespace)
+    total_passwords = len(potential_passwords)
+    passwords_per_job = min(ceil(total_passwords / threads),
+                            100_000)
+    total_jobs = ceil(total_passwords / passwords_per_job)
 
     # Password file.
     basename, pdf_extension = os.path.splitext(input_pdf)
@@ -32,7 +37,7 @@ if __name__ == '__main__':
     try:
         with beam.Pipeline(options=pipeline_options) as p:
             (p
-             | 'Create worker index' >> beam.Create([0])
+             | 'Create job indices' >> beam.Create(total_jobs)
              | 'Fetch passwords list' >> beam.ParDo(
                 GeneratePasswordLists(
                     threads=threads,

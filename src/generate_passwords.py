@@ -49,7 +49,9 @@ def generate_passwords(password_length: int,
 
 class GeneratePasswordLists(beam.DoFn):
     """Fetches passwords' list of this worker."""
-    def __init__(self, threads: int, potential_passwords: t.List[str]):
+    def __init__(self,
+                 threads: int,
+                 potential_passwords: t.List[str]):
         self.threads = threads
         self.potential_passwords = potential_passwords
 
@@ -59,16 +61,12 @@ class GeneratePasswordLists(beam.DoFn):
             return int(num) + 1
         return int(num)
 
-    def process(self, _: int) -> t.Iterator[t.List[str]]:
+    def process(self, total_jobs: int) -> t.Iterator[t.List[str]]:
         """Cuts out the password list for the given worker index."""
-
-        # Number of passwords to process per worker.
-        total_passwords = len(self.potential_passwords)
-        passwords_per_worker = min(self.ceil(total_passwords / self.threads),
-                                   10_000)
-        total_divisions = self.ceil(total_passwords / passwords_per_worker)
-
-        for i in range(total_divisions):
+        passwords_per_worker = self.ceil(len(self.potential_passwords) /
+                                         total_jobs)
+        for i in range(total_jobs):
+            job_index = i+1
             password_list = self.potential_passwords[
                 i * passwords_per_worker: (i + 1) * passwords_per_worker]
-            yield password_list
+            yield job_index, password_list
