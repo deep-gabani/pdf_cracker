@@ -48,8 +48,9 @@ if __name__ == '__main__':
 
     password = crack_pdf(input_pdf, potential_passwords)
     if password:
-        print(f'Whohooo! The password for pdf {get_colored_text(input_pdf, Colors.header)} is: \
-              "{get_colored_text(password, Colors.okgreen)}".')
+        print(f'Whohooo! The password for pdf {get_colored_text(input_pdf, Colors.header)} is: ' +
+              f'"{get_colored_text(password, Colors.okgreen)}".')
     else:
-        print(get_colored_text('Oh o! Could not crack it with the arguments given. \
-              Try with different ones!', Colors.fail))
+        print(get_colored_text(
+            'Oh o! Could not crack it with the arguments given. Try with different ones!',
+            Colors.fail))
