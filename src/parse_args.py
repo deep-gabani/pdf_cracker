@@ -6,7 +6,7 @@ import typing as t
 def parse_args() -> t.Tuple:
     """Parses arguments and returns a tuple of arguments."""
     parser = argparse.ArgumentParser(
-        prog='pdf-cracker',
+        prog='pdf_cracker',
         description='PDF Password Cracker.'
     )
 

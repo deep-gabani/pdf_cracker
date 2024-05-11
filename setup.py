@@ -1,4 +1,4 @@
-"""Setup pdf-cracker.
+"""Setup pdf_cracker.
 
 This setup.py script makes use of Apache Beam's recommended way to install
 non-python dependencies to worker images.
@@ -68,7 +68,7 @@ class CustomCommands(Command):
 
 
 setup(
-    name='pdf-cracker',
+    name='pdf_cracker',
     packages=find_packages(),
     author='Deep',
     author_email='16bit052@nirmauni.ac.in',
